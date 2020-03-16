@@ -2,22 +2,17 @@ document.querySelector(".lottery__button").addEventListener("click",function(e){
     var lottery = [];
     for(let i =0;i<7;i++){
         let rd = getRandom();
-        if(lottery.indexOf(rd)>0){
-            i -= 1;
+        for(let j = 0;j<7;j++){
+            while(lottery[j] == rd){
+                rd = getRandom();
+            }
         }
-        else{
-            lottery.push(rd);
-        }
+        lottery.push(rd);
     }
-    show(lottery);
-})
-
-function getRandom(){
-    return Math.floor(Math.random()*52)+1;
-}
-
-function show(lottery){
     for(let i=0;i<7;i++){
         document.getElementsByClassName("lottery__num")[i].value = lottery[i];
     }
+})
+function getRandom(){
+    return Math.floor(Math.random()*52)+1;
 }
